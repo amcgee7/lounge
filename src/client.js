@@ -46,6 +46,7 @@ var inputs = [
 	"quit",
 	"raw",
 	"topic",
+	"join"
 ].reduce(function(plugins, name) {
 	var path = "./plugins/inputs/" + name;
 	var plugin = require(path);
@@ -152,7 +153,8 @@ Client.prototype.connect = function(args) {
 			}
 
 			channels.push(new Chan({
-				name: chan.name
+				name: chan.name,
+				key: chan.key
 			}));
 		});
 
@@ -163,12 +165,22 @@ Client.prototype.connect = function(args) {
 	// also used by the "connect" window
 	} else if (args.join) {
 		channels = args.join
-			.replace(/\,/g, " ")
-			.split(/\s+/g)
+			.split(/\, /g)
 			.map(function(chan) {
-				return new Chan({
-					name: chan
-				});
+				log.info('channel:'+chan);
+				chan = chan.trim();
+				chan = chan.split(' ');
+				if (chan.length==1) {
+					return new Chan({
+						name: chan[0]
+					});
+				}
+				else {
+					return new Chan({
+						name: chan[0],
+						key: chan[1]
+					});
+				}
 			});
 	}
 

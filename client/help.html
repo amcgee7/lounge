@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="referrer" content="no-referrer">
+	<meta name="theme-color" content="#455164">
+
+	<title>The Lounge</title>
+
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link id="theme" rel="stylesheet" href="<%= theme %>">
+	<style id="user-specified-css"></style>
+
+	<link rel="shortcut icon" href="img/favicon.png" data-other="img/favicon-notification.png" data-toggled="false" id="favicon">
+	<link rel="apple-touch-icon" sizes="120x120" href="img/apple-touch-icon-120x120.png">
+	<link rel="manifest" href="manifest.json">
+
+	</head>
+<body>
+	<div id="main" class="help">
+		<h1>Requesting an Account or Trouble with Sign-in</h1>
+		<p>To Request an account email request too&nbsp;<a href="mailto:amcgee7@jaguarlandrover.com">amcgee7@jaguarlandrover.com</a></p>
+		<h1>Trouble with invalid ssl.</h1>
+		<p><strong>These instructions were written with Ubuntu 16.04 in mind. &nbsp;You must have the package openssh installed.</strong></p>
+		<p>One solution to this problem is that the root CA is not install ed on your system and will need to be installed.</p>
+		<ol>
+		<li>Get this root CA for <a href="https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem">letsencrypt X3</a>. &nbsp;If the link doesn't work try <a href="https://letsencrypt.org/certificates/">here</a>&nbsp;or search for letsencrypt root certificate. Make sure you get the pem file.</li>
+		<li>This file or a link to the file belongs in <strong>/etc/ssl/certs/</strong> folder. &nbsp;Note on other distrabutions&nbsp;the location may change.</li>
+		<li>Once done you will need to run&nbsp;<strong>sudo c_rehash</strong> to have the CA applied. &nbsp;</li>
+		<li>Testing is easy run <strong>openssl s_client -connect irc.jlrngi.com:6697</strong> and this sould tell you the cert is now verified.</li>
+		</ol>
+		<p>If this doesn't work let me know what error you are getting at the email address above.</p>
+	</div>
+	<div id="context-menu-container">
+		<ul id="context-menu"></ul>
+	</div>
+
+	<script src="socket.io/socket.io.js"></script>
+	<script src="js/libs.min.js"></script>
+	<script src="js/lounge.templates.js"></script>
+</body>
+</html>

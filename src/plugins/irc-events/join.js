@@ -5,10 +5,14 @@ var User = require("../../models/user");
 module.exports = function(irc, network) {
 	var client = this;
 	irc.on("join", function(data) {
+		log.info('join data:'+data.channel);
+		log.info('join data:'+data.key);
+		//console.log( new Error().stack);
 		var chan = network.getChannel(data.channel);
 		if (typeof chan === "undefined") {
 			chan = new Chan({
-				name: data.channel
+				name: data.channel,
+				key: data.key
 			});
 			network.channels.push(chan);
 			client.save();

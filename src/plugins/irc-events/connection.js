@@ -14,6 +14,7 @@ module.exports = function(irc, network) {
 
 	irc.on("registered", function() {
 		if (network.irc.network.cap.enabled.length > 0) {
+			log.info('network.channels '.network.channels[0]);
 			network.channels[0].pushMessage(client, new Msg({
 				text: "Enabled capabilities: " + network.irc.network.cap.enabled.join(", ")
 			}));
@@ -39,7 +40,9 @@ module.exports = function(irc, network) {
 			}
 
 			setTimeout(function() {
-				network.irc.join(chan.name);
+				log.info('Join channel '+chan.name);
+				log.info('key channel '+chan.key);
+				network.irc.join(chan.name,chan.key);
 			}, delay);
 			delay += 1000;
 		});
